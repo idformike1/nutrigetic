@@ -54,17 +54,17 @@ export default function HomePage() {
   return (
     <AnimatedMain>
       <section className="section-spacing" data-gsap-hero>
-        <div className="container">
-          <div className="max-w-3xl stack-5">
+        <div className="container grid gap-12 md:grid-cols-2 md:items-center">
+          <div className="stack-5">
             <span className="eyebrow">
-              Nutrition and wellness support
+              Nutrition & Wellness Support
             </span>
             <h1 className="hero-heading">
               Personalized Nutrition & Wellness Consultation
             </h1>
-            <p className="body-copy reading-width sm:text-lg">
-              Get clear, practical guidance designed to improve daily nutrition habits, support
-              long-term wellness, and help you move forward with confidence.
+            <p className="body-copy max-w-xl sm:text-lg">
+              Practical guidance for stronger nutrition habits, sustainable wellness, and confident
+              daily choices.
             </p>
             <div className="pt-2">
               <Link
@@ -73,6 +73,30 @@ export default function HomePage() {
               >
                 Book Consultation
               </Link>
+            </div>
+          </div>
+
+          <div
+            className="min-h-[300px] rounded-xl bg-amber-50 ring-1 ring-amber-100"
+            aria-hidden="true"
+          />
+        </div>
+      </section>
+
+      <section className="pb-12" data-gsap-section>
+        <div className="container">
+          <div className="grid gap-3 text-sm font-semibold text-slate-700 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-lg bg-white px-5 py-4 ring-1 ring-slate-200">
+              Personalized Plans
+            </div>
+            <div className="rounded-lg bg-white px-5 py-4 ring-1 ring-slate-200">
+              1:1 Consultation
+            </div>
+            <div className="rounded-lg bg-white px-5 py-4 ring-1 ring-slate-200">
+              Sustainable Results
+            </div>
+            <div className="rounded-lg bg-white px-5 py-4 ring-1 ring-slate-200">
+              Trusted Guidance
             </div>
           </div>
         </div>
