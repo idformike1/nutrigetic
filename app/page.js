@@ -8,24 +8,28 @@ export const metadata = {
 
 const services = [
   {
+    icon: "01",
     title: "Personal Nutrition Guidance",
     description:
-      "Structured nutrition support focused on practical habits, sustainable food choices, and daily consistency."
+      "Practical habit support for better food choices and daily consistency."
   },
   {
+    icon: "02",
     title: "Wellness Consultations",
     description:
-      "One-to-one consultation sessions designed to clarify goals, assess lifestyle patterns, and build an actionable plan."
+      "One-to-one sessions that clarify goals and shape an actionable plan."
   },
   {
+    icon: "03",
     title: "Weight Management Support",
     description:
-      "Balanced guidance for improving energy, confidence, and long-term health without overly restrictive routines."
+      "Balanced guidance for energy, confidence, and long-term health."
   },
   {
+    icon: "04",
     title: "Family Nutrition Planning",
     description:
-      "Simple meal and wellness strategies that help households make healthier choices with less confusion."
+      "Simple meal strategies that make healthier household choices easier."
   }
 ];
 
@@ -111,11 +115,21 @@ export default function HomePage() {
               wellness improvement.
             </p>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-10 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service) => (
-              <article key={service.title} className="surface-card card-padding" data-gsap-card>
-                <h3 className="card-heading">{service.title}</h3>
-                <p className="mt-3 text-sm text-slate-600">{service.description}</p>
+              <article
+                key={service.title}
+                className="rounded-lg bg-white p-6 shadow-[0_12px_32px_rgba(15,23,42,0.06)] ring-1 ring-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(15,23,42,0.10)]"
+                data-gsap-card
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-sm font-semibold text-green-700 ring-1 ring-green-100">
+                  {service.icon}
+                </div>
+                <h3 className="mt-5 card-heading">{service.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{service.description}</p>
+                <Link href="/services" className="mt-5 inline-flex text-sm font-semibold text-green-700">
+                  Learn more
+                </Link>
               </article>
             ))}
           </div>
