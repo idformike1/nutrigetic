@@ -9,7 +9,7 @@ const links = [
   { href: "/services", label: "Services" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact", cta: true },
-  { href: "/#bmi-calculator", label: "BMI Calculator" }
+  { href: "/bmi-calculator", label: "BMI Calculator" }
 ];
 
 export default function Navbar() {
