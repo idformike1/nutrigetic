@@ -102,7 +102,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-spacing section-divider" data-gsap-section>
+      <section className="section-spacing section-divider bg-gray-50" data-gsap-section>
         <div className="container">
           <div className="max-w-2xl stack-3">
             <h2 className="section-heading">Services</h2>
@@ -122,7 +122,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-spacing section-divider" data-gsap-section>
+      <section className="section-spacing section-divider bg-white" data-gsap-section>
         <div className="container">
           <div className="max-w-2xl stack-3">
             <h2 className="section-heading">Why clients trust Nutrigetic</h2>
@@ -140,7 +140,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-spacing section-divider" data-gsap-section>
+      <section className="section-spacing section-divider bg-gray-50" data-gsap-section>
         <div className="container">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl stack-3">
@@ -167,7 +167,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-spacing section-divider" data-gsap-section>
+      <section
+        className="section-spacing section-divider bg-green-50 [--section-space:88px] md:[--section-space:104px]"
+        data-gsap-section
+      >
         <div className="container">
           <div className="surface-card-muted panel-padding">
             <div className="max-w-2xl stack-4">
