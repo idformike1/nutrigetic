@@ -63,10 +63,6 @@ picture {
   max-width: 100%;
 }
 
-body {
-  min-height: 100vh;
-}
-
 .site-shell {
   min-height: 100vh;
   display: flex;
