@@ -41,14 +41,20 @@ const testimonials = [
 
 const posts = [
   {
+    category: "Wellness",
+    date: "Jan 12, 2026",
     title: "Simple Nutrition Habits That Support Everyday Wellness",
     excerpt: "A short guide to consistent habits that make healthy eating easier to maintain."
   },
   {
+    category: "Consultation",
+    date: "Jan 8, 2026",
     title: "How to Prepare for Your First Wellness Consultation",
     excerpt: "What to bring, what to expect, and how to make your first session more effective."
   },
   {
+    category: "Meal Planning",
+    date: "Jan 4, 2026",
     title: "Balanced Meal Planning for Busy Professionals",
     excerpt: "Practical planning ideas for people who want better nutrition without complex routines."
   }
@@ -167,14 +173,27 @@ export default function HomePage() {
               View all posts
             </Link>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
-              <article key={post.title} className="surface-card card-padding" data-gsap-card>
-                <h3 className="card-heading">{post.title}</h3>
-                <p className="mt-3 text-sm text-slate-600">{post.excerpt}</p>
-                <Link href="/blog" className="mt-4 inline-flex text-link">
-                  Read more
-                </Link>
+              <article
+                key={post.title}
+                className="group overflow-hidden rounded-lg bg-white shadow-[0_12px_32px_rgba(15,23,42,0.06)] ring-1 ring-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(15,23,42,0.10)]"
+                data-gsap-card
+              >
+                <div className="overflow-hidden bg-green-50">
+                  <div
+                    className="aspect-video rounded-b-lg bg-gradient-to-br from-green-50 to-slate-100 transition duration-300 group-hover:scale-[1.03]"
+                    aria-hidden="true"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.08em] text-green-700">
+                    {post.category}
+                  </p>
+                  <h3 className="mt-3 card-heading">{post.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{post.excerpt}</p>
+                  <p className="mt-5 text-xs font-medium text-slate-500">{post.date}</p>
+                </div>
               </article>
             ))}
           </div>
