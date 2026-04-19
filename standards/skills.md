@@ -1,0 +1,5 @@
+- Tech: Next.js + Tailwind
+- Clean components only
+- No inline styles
+- Mobile-first
+- Reusable structure

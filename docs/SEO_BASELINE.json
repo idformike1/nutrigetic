@@ -1,0 +1,214 @@
+{
+  "pages": [
+    {
+      "url": "https://www.nutrigetic.com/",
+      "title": "Nutrigetic \u2013 Life is now! Take care of your wellness today.",
+      "meta_description": "Nutrigetic offers practical wellness solutions, diet consultations, and logistics changes for a healthier life. Explore our BMI calculator, lifestyle blogs, and nutritional juices.",
+      "h1": "Life is Now",
+      "headings": [
+        "H2: BMI CALCULATOR",
+        "H3: Practical solutions and logistic changes are what we focus on!",
+        "H2: What Our Client's Says",
+        "H2: Sessions",
+        "H2: Gallery",
+        "H2: Blogs",
+        "H2: BEETROOT",
+        "H2: MILK: RECOVERY DRINK?",
+        "H2: Summer Coolent Recipies",
+        "H3: Contact Us",
+        "H2: BMI CALCULATOR",
+        "H2: Connect With Us",
+        "H2: Address"
+      ],
+      "h2_h3_structure": {
+        "h2": [
+          "BMI CALCULATOR",
+          "What Our Client's Says",
+          "Sessions",
+          "Gallery",
+          "Blogs",
+          "BEETROOT",
+          "MILK: RECOVERY DRINK?",
+          "Summer Coolent Recipies",
+          "BMI CALCULATOR",
+          "Connect With Us",
+          "Address"
+        ],
+        "h3": [
+          "Practical solutions and logistic changes are what we focus on!",
+          "Contact Us"
+        ]
+      },
+      "internal_links": [
+        "https://www.nutrigetic.com/blog/",
+        "http://www.nutrigetic.com/water-melon-juice-recipe/",
+        "http://www.nutrigetic.com/cucumber-juice/",
+        "https://www.nutrigetic.com/uncategorized/beetroot/"
+      ],
+      "target_keywords": [
+        "wellness",
+        "nutrition consultant",
+        "diet solutions",
+        "BMI calculator",
+        "health",
+        "healthy lifestyle"
+      ],
+      "suggested_improvements": {
+        "missing_meta": [
+          "Missing meta description tags on the live site"
+        ],
+        "weak_headings": [
+          "Duplicate H2 tags for 'BMI CALCULATOR'",
+          "H3 'Contact Us' seems disconnected from a parent H2 concept"
+        ],
+        "seo_gaps": [
+          "H1 'Life is Now' is inspiring but not SEO-optimized for target keywords like 'Nutritionist' or 'Wellness Consulting'"
+        ]
+      }
+    },
+    {
+      "url": "https://www.nutrigetic.com/blog/",
+      "title": "Blog \u2013 Nutrigetic",
+      "meta_description": "Read the Nutrigetic blog for healthy recipes, nutrition tips, and recovery drinks like beetroot and milk to boost your wellness journey.",
+      "h1": "",
+      "headings": [
+        "H2: BEETROOT",
+        "H2: MILK: RECOVERY DRINK?",
+        "H2: Connect With Us",
+        "H2: Address"
+      ],
+      "h2_h3_structure": {
+        "h2": [
+          "BEETROOT",
+          "MILK: RECOVERY DRINK?",
+          "Connect With Us",
+          "Address"
+        ],
+        "h3": []
+      },
+      "internal_links": [
+        "https://www.nutrigetic.com/",
+        "https://www.nutrigetic.com/uncategorized/beetroot/",
+        "https://www.nutrigetic.com/uncategorized/milk-recovery-drink/",
+        "https://www.nutrigetic.com/category/uncategorized/"
+      ],
+      "target_keywords": [
+        "nutrition blog",
+        "healthy recipes",
+        "recovery drinks",
+        "wellness articles"
+      ],
+      "suggested_improvements": {
+        "missing_meta": [
+          "Missing meta description tags on the live site"
+        ],
+        "weak_headings": [
+          "Missing H1 completely",
+          "H2s represent individual posts but lack an overarching introductory section"
+        ],
+        "seo_gaps": [
+          "Needs an H1 targeting 'Nutrition & Wellness Blog' or 'Nutrigetic Articles'. Description should be added."
+        ]
+      }
+    },
+    {
+      "url": "http://www.nutrigetic.com/water-melon-juice-recipe/",
+      "title": "Water Melon Juice \u2013 Recipe \u2013 Nutrigetic",
+      "meta_description": "Try this refreshing and healthy watermelon juice recipe by Nutrigetic. Perfect for summer coolant and daily wellness routines.",
+      "h1": "",
+      "headings": [
+        "H2: WATER MELON JUICE RECIPE",
+        "H2: Connect With Us",
+        "H2: Address"
+      ],
+      "h2_h3_structure": {
+        "h2": [
+          "WATER MELON JUICE RECIPE",
+          "Connect With Us",
+          "Address"
+        ],
+        "h3": []
+      },
+      "internal_links": [
+        "http://www.nutrigetic.com/",
+        "http://www.nutrigetic.com/blog/"
+      ],
+      "target_keywords": [
+        "watermelon juice recipe",
+        "healthy summer drink",
+        "nutrigetic recipe",
+        "summer coolant"
+      ],
+      "suggested_improvements": {
+        "missing_meta": [
+          "Missing meta description tags on the live site"
+        ],
+        "weak_headings": [
+          "Missing H1 completely. Main title 'WATER MELON JUICE RECIPE' is formatted as H2 rather than H1."
+        ],
+        "seo_gaps": [
+          "Recipe pages should use H1 for the recipe name and should ideally include recipe schema markup."
+        ]
+      }
+    },
+    {
+      "url": "http://www.nutrigetic.com/cucumber-juice/",
+      "title": "Cucumber Juice \u2013 Nutrigetic",
+      "meta_description": "Refresh your day with our simple and nutritious cucumber juice recipe from Nutrigetic. Discover the health benefits of this hydrating coolant.",
+      "h1": "",
+      "headings": [
+        "H2: Cucumber Juice",
+        "H2: Connect With Us",
+        "H2: Address"
+      ],
+      "h2_h3_structure": {
+        "h2": [
+          "Cucumber Juice",
+          "Connect With Us",
+          "Address"
+        ],
+        "h3": []
+      },
+      "internal_links": [
+        "http://www.nutrigetic.com/",
+        "http://www.nutrigetic.com/blog/"
+      ],
+      "target_keywords": [
+        "cucumber juice recipe",
+        "hydrating drinks",
+        "healthy coolant",
+        "easy cucumber juice"
+      ],
+      "suggested_improvements": {
+        "missing_meta": [
+          "Missing meta description tags on the live site"
+        ],
+        "weak_headings": [
+          "Missing H1 entirely. 'Cucumber Juice' is an H2 but should be an H1."
+        ],
+        "seo_gaps": [
+          "Missing H1 tag. Needs meta description added and schema markup for recipes."
+        ]
+      }
+    }
+  ],
+  "navigation": [
+    "https://www.nutrigetic.com/",
+    "https://www.nutrigetic.com/blog/"
+  ],
+  "blog": {
+    "exists": true,
+    "listing_url": "https://www.nutrigetic.com/blog/",
+    "post_urls": [
+      "https://www.nutrigetic.com/uncategorized/beetroot/",
+      "https://www.nutrigetic.com/uncategorized/milk-recovery-drink/"
+    ]
+  },
+  "global_issues": [
+    "No meta descriptions are present across any of the crawled pages",
+    "Empty or non-existent H1 tags on subpages (Blog and Recipe pages)",
+    "Inconsistent protocol usage (HTTP vs HTTPS used in internal links, e.g., 'http://www.nutrigetic.com/water-melon-juice-recipe/')",
+    "Blog categories use 'uncategorized' in the URL structure ('/uncategorized/beetroot/'), missing SEO value",
+    "Homepage H1 'Life is Now' lacks specific SEO target keywords."
+  ]
+}
