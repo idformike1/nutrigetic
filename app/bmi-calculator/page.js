@@ -18,28 +18,48 @@ function getBmiCategory(bmi) {
   return "Obese";
 }
 
+function getHeightError(height) {
+  const heightValue = Number(height);
+
+  if (height === "" || heightValue < 100 || heightValue > 250) {
+    return "Enter height between 100-250 cm";
+  }
+
+  return "";
+}
+
+function getWeightError(weight) {
+  const weightValue = Number(weight);
+
+  if (weight === "" || weightValue < 30 || weightValue > 250) {
+    return "Enter weight between 30-250 kg";
+  }
+
+  return "";
+}
+
 export default function BmiCalculatorPage() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [result, setResult] = useState(null);
-  const [error, setError] = useState("");
+
+  const heightError = getHeightError(height);
+  const weightError = getWeightError(weight);
+  const isFormInvalid = Boolean(heightError || weightError);
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    const heightValue = Number(height);
-    const weightValue = Number(weight);
-
-    if (heightValue <= 0 || weightValue <= 0) {
+    if (isFormInvalid) {
       setResult(null);
-      setError("Enter a valid height and weight to calculate BMI.");
       return;
     }
 
+    const heightValue = Number(height);
+    const weightValue = Number(weight);
     const heightInMeters = heightValue / 100;
     const bmi = weightValue / heightInMeters ** 2;
 
-    setError("");
     setResult({
       value: bmi.toFixed(1),
       category: getBmiCategory(bmi)
@@ -77,13 +97,24 @@ export default function BmiCalculatorPage() {
                   id="height"
                   name="height"
                   type="number"
-                  min="1"
+                  min="100"
+                  max="250"
                   step="0.1"
                   value={height}
-                  onChange={(event) => setHeight(event.target.value)}
+                  onChange={(event) => {
+                    setHeight(event.target.value);
+                    setResult(null);
+                  }}
                   className="form-control"
                   placeholder="170"
+                  aria-describedby="height-error"
+                  aria-invalid={Boolean(heightError)}
                 />
+                {heightError ? (
+                  <p id="height-error" className="text-sm text-slate-600">
+                    {heightError}
+                  </p>
+                ) : null}
               </div>
 
               <div className="space-y-2">
@@ -94,24 +125,30 @@ export default function BmiCalculatorPage() {
                   id="weight"
                   name="weight"
                   type="number"
-                  min="1"
+                  min="30"
+                  max="250"
                   step="0.1"
                   value={weight}
-                  onChange={(event) => setWeight(event.target.value)}
+                  onChange={(event) => {
+                    setWeight(event.target.value);
+                    setResult(null);
+                  }}
                   className="form-control"
                   placeholder="68"
+                  aria-describedby="weight-error"
+                  aria-invalid={Boolean(weightError)}
                 />
+                {weightError ? (
+                  <p id="weight-error" className="text-sm text-slate-600">
+                    {weightError}
+                  </p>
+                ) : null}
               </div>
-
-              {error ? (
-                <p className="rounded-lg bg-gray-50 px-4 py-3 text-sm font-medium text-slate-700 ring-1 ring-slate-200">
-                  {error}
-                </p>
-              ) : null}
 
               <button
                 type="submit"
-                className="inline-flex w-full justify-center rounded-full bg-amber-600 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(217,119,6,0.24)] ring-1 ring-amber-500/30 transition-colors hover:bg-amber-700"
+                disabled={isFormInvalid}
+                className="inline-flex w-full justify-center rounded-full bg-amber-600 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(217,119,6,0.24)] ring-1 ring-amber-500/30 transition-colors hover:bg-amber-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 disabled:shadow-none disabled:ring-slate-200"
               >
                 Calculate BMI
               </button>

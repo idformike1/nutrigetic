@@ -1,3 +1,5 @@
+import ContactForm from "./ContactForm";
+
 export const metadata = {
   title: "Contact Nutrigetic | Book Consultation",
   description: "Contact Nutrigetic to book your personalized nutrition consultation."
@@ -34,62 +36,7 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <form className="mt-8 space-y-5">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-slate-800">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    className="form-control"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-slate-800">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    className="form-control"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="phone" className="text-sm font-medium text-slate-800">
-                    Phone
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    className="form-control"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium text-slate-800">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    className="form-control"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="mt-2 inline-flex rounded-full bg-amber-600 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(217,119,6,0.24)] ring-1 ring-amber-500/30 transition-colors hover:bg-amber-700"
-                >
-                  Book Consultation
-                </button>
-              </form>
+              <ContactForm />
             </div>
 
             <aside className="surface-card-muted panel-padding">

@@ -125,19 +125,11 @@ export default function HomePage() {
 
       <section className="pb-12" data-gsap-section>
         <div className="container">
-          <div className="grid gap-3 text-sm font-semibold text-slate-700 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-lg bg-white px-5 py-4 ring-1 ring-slate-200">
-              Personalized Plans
-            </div>
-            <div className="rounded-lg bg-white px-5 py-4 ring-1 ring-slate-200">
-              1:1 Consultation
-            </div>
-            <div className="rounded-lg bg-white px-5 py-4 ring-1 ring-slate-200">
-              Sustainable Results
-            </div>
-            <div className="rounded-lg bg-white px-5 py-4 ring-1 ring-slate-200">
-              Trusted Guidance
-            </div>
+          <div className="trust-row">
+            <span>✔ Personalized Plans</span>
+            <span>✔ 1:1 Consultation</span>
+            <span>✔ Sustainable Results</span>
+            <span>✔ Trusted Guidance</span>
           </div>
         </div>
       </section>
@@ -151,21 +143,26 @@ export default function HomePage() {
               wellness improvement.
             </p>
           </div>
-          <div className="mt-10 grid gap-7 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service) => (
               <article
                 key={service.title}
-                className="rounded-lg bg-white p-6 shadow-[0_12px_32px_rgba(15,23,42,0.06)] ring-1 ring-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(15,23,42,0.10)]"
+                className="service-card"
                 data-gsap-card
               >
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-sm font-semibold text-green-700 ring-1 ring-green-100">
                   {service.icon}
                 </div>
-                <h3 className="mt-5 card-heading">{service.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{service.description}</p>
-                <Link href="/services" className="mt-5 inline-flex text-sm font-semibold text-green-700">
-                  Learn more
-                </Link>
+                <h3 className="mb-2 mt-5 card-heading">{service.title}</h3>
+                <p className="mb-4 text-sm leading-6 text-slate-600">{service.description}</p>
+                <div className="mt-4">
+                  <Link href="/contact" className="button-primary">
+                    Book Consultation
+                  </Link>
+                  <Link href="/services" className="mt-3 block button-secondary">
+                    Learn more
+                  </Link>
+                </div>
               </article>
             ))}
           </div>
