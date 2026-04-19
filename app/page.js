@@ -34,27 +34,54 @@ const services = [
 ];
 
 const testimonials = [
-  "Clients describe the consultation approach as practical, clear, and easy to follow.",
-  "Plans are shaped around real routines so progress feels sustainable instead of overwhelming.",
-  "Nutrition advice stays focused on trust, clarity, and measurable next steps."
+  {
+    quote: "Simple and practical guidance that actually worked for my routine.",
+    name: "Client, Delhi",
+    role: "Wellness consultation"
+  },
+  {
+    quote: "The plan felt realistic, clear, and easy to follow day by day.",
+    name: "Client, Gurugram",
+    role: "Nutrition planning"
+  },
+  {
+    quote: "Supportive advice without pressure, with steps I could maintain.",
+    name: "Client, Noida",
+    role: "Lifestyle support"
+  }
+];
+
+const trustStats = [
+  "100+ clients supported",
+  "Personalized plans",
+  "Sustainable results"
 ];
 
 const posts = [
   {
     category: "Wellness",
     date: "Jan 12, 2026",
+    image:
+      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Balanced breakfast bowl with fruit and grains",
     title: "Simple Nutrition Habits That Support Everyday Wellness",
     excerpt: "A short guide to consistent habits that make healthy eating easier to maintain."
   },
   {
     category: "Consultation",
     date: "Jan 8, 2026",
+    image:
+      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Wellness professional working on a laptop during consultation notes",
     title: "How to Prepare for Your First Wellness Consultation",
     excerpt: "What to bring, what to expect, and how to make your first session more effective."
   },
   {
     category: "Meal Planning",
     date: "Jan 4, 2026",
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Fresh salad bowl with vegetables and healthy ingredients",
     title: "Balanced Meal Planning for Busy Professionals",
     excerpt: "Practical planning ideas for people who want better nutrition without complex routines."
   }
@@ -86,10 +113,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div
-            className="min-h-[300px] rounded-xl bg-amber-50 ring-1 ring-amber-100"
-            aria-hidden="true"
-          />
+          <div className="overflow-hidden rounded-xl bg-green-50 shadow-[0_18px_44px_rgba(15,23,42,0.10)] ring-1 ring-green-100">
+            <img
+              src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200&q=80"
+              alt="Fresh ingredients arranged for healthy food preparation"
+              className="h-[320px] w-full object-cover md:h-[420px]"
+            />
+          </div>
         </div>
       </section>
 
@@ -150,11 +180,30 @@ export default function HomePage() {
               A simple credibility section focused on clarity, consistency, and supportive guidance.
             </p>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-7 md:grid-cols-3">
             {testimonials.map((item) => (
-              <article key={item} className="surface-card-muted card-padding" data-gsap-card>
-                <p className="text-sm text-slate-700">{item}</p>
+              <article
+                key={item.name}
+                className="rounded-lg bg-white p-6 shadow-[0_12px_32px_rgba(15,23,42,0.06)] ring-1 ring-slate-200"
+                data-gsap-card
+              >
+                <p className="text-base font-medium leading-7 text-slate-800">
+                  "{item.quote}"
+                </p>
+                <div className="mt-5 border-t border-slate-200 pt-4">
+                  <p className="text-sm font-semibold text-slate-900">{item.name}</p>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-[0.08em] text-green-700">
+                    {item.role}
+                  </p>
+                </div>
               </article>
+            ))}
+          </div>
+          <div className="mt-8 grid gap-3 text-sm font-semibold text-slate-700 sm:grid-cols-3">
+            {trustStats.map((item) => (
+              <div key={item} className="rounded-lg bg-green-50 px-5 py-4 ring-1 ring-green-100">
+                {item}
+              </div>
             ))}
           </div>
         </div>
@@ -181,9 +230,10 @@ export default function HomePage() {
                 data-gsap-card
               >
                 <div className="overflow-hidden bg-green-50">
-                  <div
-                    className="aspect-video rounded-b-lg bg-gradient-to-br from-green-50 to-slate-100 transition duration-300 group-hover:scale-[1.03]"
-                    aria-hidden="true"
+                  <img
+                    src={post.image}
+                    alt={post.imageAlt}
+                    className="aspect-video w-full object-cover transition duration-300 group-hover:scale-[1.03]"
                   />
                 </div>
                 <div className="p-6">
