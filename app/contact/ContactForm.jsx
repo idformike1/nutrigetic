@@ -2,151 +2,131 @@
 
 import { useState } from "react";
 
-const initialForm = {
-  name: "",
-  email: "",
-  phone: "",
-  message: ""
-};
-
-function getErrors(form) {
-  return {
-    name: form.name.trim() ? "" : "Enter your name",
-    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())
-      ? ""
-      : "Enter a valid email address",
-    phone: form.phone.trim() === "" || /^\d+$/.test(form.phone.trim())
-      ? ""
-      : "Enter numbers only",
-    message: form.message.trim() ? "" : "Enter your message"
-  };
-}
-
 export default function ContactForm() {
-  const [form, setForm] = useState(initialForm);
-  const [successMessage, setSuccessMessage] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const errors = getErrors(form);
-  const isInvalid = Object.values(errors).some(Boolean);
+  const validate = (name, value) => {
+    let error = "";
+    if (name === "name" && !value.trim()) error = "Identification required";
+    if (name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = "Valid email required";
+    if (name === "phone" && value && !/^\d+$/.test(value)) error = "Digits only";
+    if (name === "message" && !value.trim()) error = "Context required";
+    return error;
+  };
 
-  function updateField(field, value) {
-    setForm((currentForm) => ({
-      ...currentForm,
-      [field]: value
-    }));
-    setSuccessMessage("");
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+    setErrors(prev => ({ ...prev, [name]: validate(name, value) }));
+  };
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newErrors = {};
+    Object.keys(form).forEach(key => {
+      const error = validate(key, form[key]);
+      if (error) newErrors[key] = error;
+    });
 
-    if (isInvalid) {
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
-    setForm(initialForm);
-    setSuccessMessage("Thanks. Your consultation request has been received.");
+    setIsSubmitting(true);
+    await new Promise(resolve => setTimeout(resolve, 1200));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
+
+  if (isSubmitted) {
+    return (
+      <div className="text-center animate-in fade-in zoom-in-95 duration-500">
+        <div className="w-20 h-20 bg-[var(--color-cream-dark)] text-[var(--color-forest)] rounded-full flex items-center justify-center mx-auto mb-8">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2 className="font-display text-4xl text-[var(--color-forest)] mb-4">Request Received</h2>
+        <p className="text-[var(--color-text-muted)] mb-10 max-w-[32ch] mx-auto">
+          Our team has received your clinical details and will reach out within 24 hours.
+        </p>
+        <button 
+          onClick={() => setIsSubmitted(false)}
+          className="text-[var(--color-amber)] font-medium uppercase tracking-[0.1em] text-sm hover:opacity-75 transition-opacity"
+        >
+          Submit another request
+        </button>
+      </div>
+    );
   }
 
   return (
-    <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
-      <div className="space-y-2">
-        <label htmlFor="name" className="text-sm font-medium text-slate-800">
-          Name
-        </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          value={form.name}
-          onChange={(event) => updateField("name", event.target.value)}
-          className="form-control"
-          aria-describedby="name-error"
-          aria-invalid={Boolean(errors.name)}
-        />
-        {errors.name ? (
-          <p id="name-error" className="text-sm text-slate-600">
-            {errors.name}
-          </p>
-        ) : null}
+    <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+      <div className="grid md:grid-cols-2 gap-10">
+        <div className="flex flex-col gap-2">
+          <label className="text-[0.72rem] font-medium uppercase tracking-[0.15em] text-[var(--color-text-muted)]">Full Name</label>
+          <input 
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Sarah Jenkins"
+            className="w-full bg-transparent border-b-2 border-[var(--color-rule)] py-3 text-[var(--color-forest)] font-body focus:border-[var(--color-amber)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/30"
+          />
+          {errors.name && <span className="text-[0.65rem] text-[var(--color-amber)] uppercase font-medium mt-1">{errors.name}</span>}
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="text-[0.72rem] font-medium uppercase tracking-[0.15em] text-[var(--color-text-muted)]">Clinical Email</label>
+          <input 
+            name="email"
+            type="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="email@provider.com"
+            className="w-full bg-transparent border-b-2 border-[var(--color-rule)] py-3 text-[var(--color-forest)] font-body focus:border-[var(--color-amber)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/30"
+          />
+          {errors.email && <span className="text-[0.65rem] text-[var(--color-amber)] uppercase font-medium mt-1">{errors.email}</span>}
+        </div>
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="email" className="text-sm font-medium text-slate-800">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          value={form.email}
-          onChange={(event) => updateField("email", event.target.value)}
-          className="form-control"
-          aria-describedby="email-error"
-          aria-invalid={Boolean(errors.email)}
-        />
-        {errors.email ? (
-          <p id="email-error" className="text-sm text-slate-600">
-            {errors.email}
-          </p>
-        ) : null}
-      </div>
-
-      <div className="space-y-2">
-        <label htmlFor="phone" className="text-sm font-medium text-slate-800">
-          Phone
-        </label>
-        <input
-          id="phone"
+      <div className="flex flex-col gap-2">
+        <label className="text-[0.72rem] font-medium uppercase tracking-[0.15em] text-[var(--color-text-muted)]">Contact Number (Optional)</label>
+        <input 
           name="phone"
-          type="tel"
-          inputMode="numeric"
           value={form.phone}
-          onChange={(event) => updateField("phone", event.target.value)}
-          className="form-control"
-          aria-describedby="phone-error"
-          aria-invalid={Boolean(errors.phone)}
+          onChange={handleChange}
+          placeholder="+91 00000 00000"
+          className="w-full bg-transparent border-b-2 border-[var(--color-rule)] py-3 text-[var(--color-forest)] font-body focus:border-[var(--color-amber)] outline-none transition-colors placeholder:text-[var(--color-text-muted)]/30"
         />
-        {errors.phone ? (
-          <p id="phone-error" className="text-sm text-slate-600">
-            {errors.phone}
-          </p>
-        ) : null}
+        {errors.phone && <span className="text-[0.65rem] text-[var(--color-amber)] uppercase font-medium mt-1">{errors.phone}</span>}
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="message" className="text-sm font-medium text-slate-800">
-          Message
-        </label>
-        <textarea
-          id="message"
+      <div className="flex flex-col gap-2">
+        <label className="text-[0.72rem] font-medium uppercase tracking-[0.15em] text-[var(--color-text-muted)]">Consultation Goals</label>
+        <textarea 
           name="message"
-          rows="5"
           value={form.message}
-          onChange={(event) => updateField("message", event.target.value)}
-          className="form-control"
-          aria-describedby="message-error"
-          aria-invalid={Boolean(errors.message)}
+          onChange={handleChange}
+          rows="4"
+          placeholder="Tell us about your objectives..."
+          className="w-full bg-transparent border-b-2 border-[var(--color-rule)] py-3 text-[var(--color-forest)] font-body focus:border-[var(--color-amber)] outline-none transition-colors resize-none placeholder:text-[var(--color-text-muted)]/30"
         />
-        {errors.message ? (
-          <p id="message-error" className="text-sm text-slate-600">
-            {errors.message}
-          </p>
-        ) : null}
+        {errors.message && <span className="text-[0.65rem] text-[var(--color-amber)] uppercase font-medium mt-1">{errors.message}</span>}
       </div>
 
-      {successMessage ? (
-        <p className="rounded-lg bg-green-50 px-4 py-3 text-sm font-medium text-green-700 ring-1 ring-green-100">
-          {successMessage}
-        </p>
-      ) : null}
-
-      <button
+      <button 
         type="submit"
-        disabled={isInvalid}
-        className="mt-2 inline-flex rounded-full bg-amber-600 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(217,119,6,0.24)] ring-1 ring-amber-500/30 transition-colors hover:bg-amber-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 disabled:shadow-none disabled:ring-slate-200"
+        disabled={isSubmitting}
+        className="w-full bg-[var(--color-forest)] text-[var(--color-cream)] py-4 rounded-full font-body font-medium uppercase tracking-[0.08em] hover:bg-[var(--color-amber)] transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-3"
       >
-        Book Consultation
+        {isSubmitting ? (
+          <span className="w-5 h-5 border-2 border-cream/30 border-t-cream rounded-full animate-spin" />
+        ) : null}
+        {isSubmitting ? "Processing..." : "Request Consultation"}
       </button>
     </form>
   );

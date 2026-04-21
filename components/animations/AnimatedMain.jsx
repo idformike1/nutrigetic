@@ -4,69 +4,108 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+/**
+ * Global Motion Registry - Nutrigetic 2026
+ * Standardizes high-performance staggered entry using GSAP Batch.
+ * 
+ * FIX: Resolved Hero-to-Services gap by injecting refresh logic and 
+ * refining trigger start points for better viewport entry.
+ */
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function AnimatedMain({ children }) {
   const mainRef = useRef(null);
 
   useEffect(() => {
     const root = mainRef.current;
+    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return undefined;
-    }
+    // Resolve layout height discrepancies after initial load/LCP
+    const refreshRegistry = () => {
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("load", refreshRegistry);
 
     const ctx = gsap.context(() => {
+      // 1. Immediate Hero Entry
       const hero = root.querySelector("[data-gsap-hero]");
-
       if (hero) {
-        gsap.fromTo(
-          hero,
-          { autoAlpha: 0, y: 16 },
-          {
-            autoAlpha: 1,
-            duration: 0.6,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: hero,
-              start: "top 85%",
-              once: true
-            },
-            y: 0
+        gsap.fromTo(hero, 
+          { opacity: 0, y: 30 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1.2, 
+            ease: "power4.out", 
+            delay: 0.2,
+            onComplete: refreshRegistry 
           }
         );
       }
 
-      gsap.utils.toArray("[data-gsap-section]").forEach((section) => {
-        const cards = section.querySelectorAll("[data-gsap-card]");
-        const timeline = gsap.timeline({
-          defaults: { ease: "power2.out" },
-          scrollTrigger: {
-            trigger: section,
-            start: "top 82%",
-            once: true
-          }
-        });
+      // 2. Uniform Section Batched Staggers
+      const sections = gsap.utils.toArray("[data-gsap-section]");
+      
+      sections.forEach((section, index) => {
+        const staggerItems = section.querySelectorAll("[data-gsap-card], [data-gsap-stagger]");
+        
+        // Dynamic start point: Earlier entry for subsequent sections to prevent "void" stutter
+        const startPoint = index === 0 ? "top 80%" : "top 90%";
 
-        timeline.fromTo(
-          section,
-          { autoAlpha: 0, y: 20 },
-          { autoAlpha: 1, duration: 0.6, y: 0 }
-        );
-
-        if (cards.length > 0) {
-          timeline.fromTo(
-            cards,
-            { autoAlpha: 0, y: 14 },
-            { autoAlpha: 1, duration: 0.5, stagger: 0.1, y: 0 },
-            "-=0.25"
+        if (staggerItems.length > 0) {
+          ScrollTrigger.batch(staggerItems, {
+            start: startPoint,
+            onEnter: (batch) => {
+              gsap.fromTo(batch, 
+                { opacity: 0, y: 40 },
+                { 
+                  opacity: 1, 
+                  y: 0, 
+                  stagger: 0.15, 
+                  duration: 0.8, 
+                  ease: "power3.out",
+                  overwrite: true 
+                }
+              );
+            },
+            onLeaveBack: (batch) => {
+              gsap.set(batch, { opacity: 0, y: 40, overwrite: true });
+            }
+          });
+        } else {
+          gsap.fromTo(section, 
+            { opacity: 0, y: 30 },
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 1, 
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 92%",
+                toggleActions: "play none none reverse"
+              }
+            }
           );
         }
       });
+
     }, root);
 
-    return () => ctx.revert();
+    // Watch for internal layout changes
+    const resizeObserver = new ResizeObserver(() => ScrollTrigger.refresh());
+    resizeObserver.observe(root);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("load", refreshRegistry);
+      resizeObserver.disconnect();
+    };
   }, []);
 
-  return <main ref={mainRef}>{children}</main>;
+  return <div ref={mainRef}>{children}</div>;
 }

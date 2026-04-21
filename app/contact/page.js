@@ -1,91 +1,46 @@
-import ContactForm from "./ContactForm";
+"use client";
 
-export const metadata = {
-  title: "Contact Nutrigetic | Book Consultation",
-  description: "Contact Nutrigetic to book your personalized nutrition consultation."
-};
+import AnimatedMain from "../../components/animations/AnimatedMain";
+import ContactForm from "./ContactForm";
 
 export default function ContactPage() {
   return (
-    <main>
-      <section className="section-spacing">
-        <div className="container">
-          <div className="max-w-3xl stack-5">
-            <span className="eyebrow">
-              Contact Nutrigetic
-            </span>
-            <h1 className="hero-heading">
-              Contact Nutrigetic to Book a Consultation
+    <AnimatedMain>
+      <div className="grid lg:grid-cols-2 min-h-screen">
+        {/* Left Panel */}
+        <div className="bg-[var(--color-forest)] pt-[10rem] pb-[5rem] px-6 md:px-[6rem] relative overflow-hidden flex flex-col justify-between">
+          <svg viewBox="0 0 200 200" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-[0.06] text-white">
+             <path fill="currentColor" d="M100,20 C120,20 140,40 140,80 C140,120 120,160 100,180 C80,160 60,120 60,80 C60,40 80,20 100,20" />
+          </svg>
+
+          <div className="relative z-10">
+            <span className="poso-label text-[var(--color-amber-light)] before:bg-[var(--color-amber-light)]">Start your journey</span>
+            <h1 className="font-display text-4xl md:text-6xl text-[var(--color-cream)] mt-6 leading-tight">
+              Book your <br /> <em>consultation</em>
             </h1>
-            <p className="body-copy reading-width sm:text-lg">
-              Reach out with your goals, questions, or consultation request. The contact process is
-              designed to feel simple, supportive, and easy to follow.
+            <p className="mt-8 text-[rgba(245,240,232,0.6)] font-body leading-relaxed max-w-[40ch]">
+              Share your clinical goals and health history to help us prepare a supportive session designed around your routine.
             </p>
           </div>
-        </div>
-      </section>
 
-      <section className="section-spacing section-divider">
-        <div className="container">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">
-            <div className="surface-card panel-padding">
-              <div className="max-w-2xl stack-3">
-                <h2 className="section-heading">Book a consultation</h2>
-                <p className="body-copy">
-                  Share a few details to start the conversation. A simple form is enough for now.
-                </p>
-              </div>
-
-              <ContactForm />
-            </div>
-
-            <aside className="surface-card-muted panel-padding">
-              <div className="stack-3">
-                <h2 className="section-heading">Contact information</h2>
-                <p className="body-copy">
-                  Use the form or reach out directly through the details below.
-                </p>
-              </div>
-
-              <div className="mt-8 space-y-6 text-sm text-slate-700">
-                <div className="space-y-2">
-                  <h3 className="text-base font-semibold text-slate-900">Address</h3>
-                  <p>123 Wellness Avenue, Health District, New Delhi</p>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-base font-semibold text-slate-900">Email</h3>
-                  <p>
-                    <a href="mailto:hello@nutrigetic.com">hello@nutrigetic.com</a>
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-base font-semibold text-slate-900">Phone</h3>
-                  <p>
-                    <a href="tel:+910000000000">+91 00000 00000</a>
-                  </p>
-                </div>
-              </div>
-            </aside>
+          <div className="relative z-10 flex flex-wrap gap-4 mt-12">
+            {[
+              "589+ Clients",
+              "20+ Years",
+              "Certified"
+            ].map((badge) => (
+              <span key={badge} className="px-4 py-2 rounded-full border border-[rgba(245,240,232,0.1)] text-[var(--color-cream)] text-[0.75rem] font-medium tracking-wide">
+                {badge}
+              </span>
+            ))}
           </div>
         </div>
-      </section>
 
-      <section className="section-spacing section-divider">
-        <div className="container">
-          <div className="surface-card-muted panel-padding">
-            <div className="max-w-2xl stack-4">
-              <h2 className="section-heading">
-                Start with a consultation that feels clear and practical.
-              </h2>
-              <p className="body-copy">
-                Share your goals and take the first step toward a more focused nutrition and wellness plan.
-              </p>
-            </div>
-          </div>
+        {/* Right Panel */}
+        <div className="bg-[var(--color-white)] pt-[10rem] pb-[5rem] px-6 md:px-[6rem] flex flex-col justify-center">
+          <ContactForm />
         </div>
-      </section>
-    </main>
+      </div>
+    </AnimatedMain>
   );
 }
